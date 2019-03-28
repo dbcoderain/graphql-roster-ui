@@ -1,6 +1,25 @@
 import React, { Component } from 'react';
+import Squads from './Squads';
+import { gql } from 'apollo-boost';
 import logo from './logo.svg';
 import './App.css';
+
+export const ROOT_QUERY = gql`
+  query allSquads {
+    getSquads {
+      _id,
+      name
+      mission
+      members {
+        name
+        office
+        role
+      }
+    }
+  }
+`
+
+// const App = () => <Squads />
 
 class App extends Component {
   render() {
@@ -8,17 +27,8 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <h1>Roster</h1>
+          <Squads />
         </header>
       </div>
     );
@@ -26,3 +36,4 @@ class App extends Component {
 }
 
 export default App;
+
